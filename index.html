@@ -40,7 +40,7 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--navy)}
 
 /* ─── HERO ───────────────────────────────── */
 .hero{background:linear-gradient(135deg,var(--navy) 0%,#1a3a5c 100%);border-radius:14px;padding:24px 28px;margin-bottom:15px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:relative;overflow:hidden}
-.hero::before{content:'MAR';position:absolute;right:-5px;top:-25px;font-family:'Bebas Neue',sans-serif;font-size:150px;color:rgba(255,255,255,.025);letter-spacing:-5px;pointer-events:none}
+.hero::before{content:'ABR';position:absolute;right:-5px;top:-25px;font-family:'Bebas Neue',sans-serif;font-size:150px;color:rgba(255,255,255,.025);letter-spacing:-5px;pointer-events:none}
 .hero-l h1{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:#fff;line-height:1}
 .hero-l p{font-size:11px;color:rgba(255,255,255,.4);margin-top:4px}
 .hs{display:flex;gap:20px;flex-wrap:wrap}
@@ -132,7 +132,7 @@ canvas{max-height:230px}
 .fc-box{flex:1;min-width:80px;background:var(--bg);border-radius:10px;padding:11px;text-align:center}
 .fc-box.rain{background:#FEF0F0;border:1px solid #F5C6C6}
 .fc-dia{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px}
-.fc-icon{font-size:20px;margin-bottom:3px}
+.fc-icon{font-size:22px;margin-bottom:3px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;line-height:1.2}
 .fc-temp{font-size:14px;font-weight:800;color:var(--navy)}
 .fc-chuva{font-size:10px;margin-top:2px}
 
@@ -165,33 +165,28 @@ canvas{max-height:230px}
     <div class="brand-dot"></div>
     <div>
       <div>TRADE DASHBOARD</div>
-      <div class="brand-small">Grupo Cataratas · 17/03/2026</div>
+      <div class="brand-small">Grupo Cataratas · 16/04/2026</div>
     </div>
   </div>
-  <button class="np on" onclick="nav(this,'mar')">📅 Mar/2026</button>
+  <button class="np on" onclick="nav(this,'mar')">📅 ABR/2026</button>
   <button class="np" onclick="nav(this,'acum')">📊 Acumulado 2026</button>
   <button class="np" onclick="nav(this,'hist')">📈 Histórico 2025</button>
   <button class="np" onclick="nav(this,'share')">🔄 Share Trade</button>
   <button class="np" onclick="nav(this,'cli')">🏆 Top Clientes</button>
-  <div class="weather">
-    <span style="font-size:18px">☀️</span>
-    <div><div class="wt">28°C · Rio de Janeiro</div><div class="ws">Céu limpo — ótimo p/ visitação</div></div>
-  </div>
+  <div class="weather"><div class="weather"><span style="font-size:18px">🌤</span><div><div class="wt">28°C · Rio de Janeiro</div><div class="ws">previsão ao vivo</div></div></div>
 </div>
 
 <!-- ══ PAGE: MAR/2026 ══════════════════════ -->
 <div id="pg-mar" class="page on">
 
   <!-- ALERTA CLIMA -->
-  <div class="alerta" style="margin-top:18px">
-    ⛈ <strong>Alerta de chuva — Sexta-feira 20/03:</strong> Probabilidade de 60% de precipitação. Impacto esperado na visitação de Paineiras Corcovado. Avise os operadores trade com antecedência.
-  </div>
+  <div class="alerta" style="margin-top:18px"><div style="margin-top:18px"></div></div>
 
   <!-- HERO -->
   <div class="hero">
     <div class="hero-l">
-      <h1>MARÇO 2026</h1>
-      <p>Trade · Parcial até 16/03 · 17 dias restantes</p>
+      <h1 id="heroMesNome">ABRIL 2026</h1>
+      <p>Trade · Parcial até 16/30 · 14 dias restantes</p>
     </div>
     <div class="hs">
       <div class="hs-i">
@@ -278,11 +273,11 @@ canvas{max-height:230px}
   <!-- CHARTS -->
   <div class="row2">
     <div class="cc">
-      <div class="cc-h"><div class="cc-t">Realizado vs OBZ vs Projeção</div><div class="cc-s">Mar/2026 · por parque</div></div>
+      <div class="cc-h"><div class="cc-t">Realizado vs OBZ vs Projeção</div><div class="cc-s">ABR/2026 · por parque</div></div>
       <canvas id="c_obz"></canvas>
     </div>
     <div class="cc">
-      <div class="cc-h"><div class="cc-t">Comparativo Mar/2025 × Mar/2026</div><div class="cc-s">Variação real de bilhetes por parque</div></div>
+      <div class="cc-h"><div class="cc-t">Comparativo Mar/2025 × ABR/2026</div><div class="cc-s">Variação real de bilhetes por parque</div></div>
       <canvas id="c_yoy"></canvas>
     </div>
   </div>
@@ -291,11 +286,7 @@ canvas{max-height:230px}
   <div class="cc" style="margin-bottom:15px">
     <div class="cc-h"><div class="cc-t">📍 Previsão do Tempo — Rio de Janeiro (5 dias)</div><div class="cc-s">Alta probabilidade de chuva afeta Paineiras. Comunicação preventiva recomendada.</div></div>
     <div class="fc-row">
-      <div class="fc-box"><div class="fc-dia">Ter 17</div><div class="fc-icon">☀️</div><div class="fc-temp">28°</div><div class="fc-chuva" style="color:var(--up)">5%💧</div></div>
-      <div class="fc-box"><div class="fc-dia">Qua 18</div><div class="fc-icon">🌤</div><div class="fc-temp">28°</div><div class="fc-chuva" style="color:var(--up)">5%💧</div></div>
-      <div class="fc-box"><div class="fc-dia">Qui 19</div><div class="fc-icon">⛅</div><div class="fc-temp">28°</div><div class="fc-chuva" style="color:var(--up)">5%💧</div></div>
-      <div class="fc-box rain"><div class="fc-dia">Sex 20</div><div class="fc-icon">🌧</div><div class="fc-temp">26°</div><div class="fc-chuva" style="color:var(--dn)"><strong>60%💧</strong></div></div>
-      <div class="fc-box"><div class="fc-dia">Sáb 21</div><div class="fc-icon">🌦</div><div class="fc-temp">27°</div><div class="fc-chuva" style="color:var(--gold)">15%💧</div></div>
+      <div <div class="fc-box"><div class="fc-dia">Qui</div><div class="fc-icon">🌫</div><div class="fc-temp">30°</div><div class="fc-chuva" style="color:#888">0%💧</div></div><div class="fc-box"><div class="fc-dia">Sex</div><div class="fc-icon">☁️</div><div class="fc-temp">33°</div><div class="fc-chuva" style="color:#888">3%💧</div></div><div class="fc-box"><div class="fc-dia">Sáb</div><div class="fc-icon">🌦</div><div class="fc-temp">34°</div><div class="fc-chuva" style="color:#888">20%💧</div></div><div class="fc-box"><div class="fc-dia">Dom</div><div class="fc-icon">⛅</div><div class="fc-temp">29°</div><div class="fc-chuva" style="color:#888">16%💧</div></div><div class="fc-box"><div class="fc-dia">Seg</div><div class="fc-icon">🌫</div><div class="fc-temp">30°</div><div class="fc-chuva" style="color:#888">2%💧</div></div>
     </div>
   </div>
 
@@ -417,7 +408,7 @@ canvas{max-height:230px}
 <div id="pg-share" class="page">
   <div class="sec" style="margin-top:18px">
     <div><div class="sec-t">SHARE TRADE × PARQUE</div><div class="cc-s">% participação do canal trade no total de visitação</div></div>
-    <span class="badge">Mar/2026</span>
+    <span class="badge">ABR/2026</span>
   </div>
 
   <div class="row3">
@@ -439,7 +430,7 @@ canvas{max-height:230px}
   </div>
 
   <div class="cc" style="margin-bottom:15px">
-    <div class="cc-h"><div class="cc-t">Evolução do Share Trade — Jul/2025 a Mar/2026</div><div class="cc-s">% do canal trade no total · dados disponíveis a partir de Jul/25</div></div>
+    <div class="cc-h"><div class="cc-t">Evolução do Share Trade — Jul/2025 a ABR/2026</div><div class="cc-s">% do canal trade no total · dados disponíveis a partir de Jul/25</div></div>
     <canvas id="c_share_evo" style="max-height:230px"></canvas>
   </div>
 
@@ -462,16 +453,16 @@ canvas{max-height:230px}
 <!-- ══ PAGE: TOP CLIENTES ═══════════════════ -->
 <div id="pg-cli" class="page">
   <div class="sec" style="margin-top:18px">
-    <div><div class="sec-t">TOP CLIENTES TRADE</div><div class="cc-s">Ranking de agências · Mar/2026 · dados reais da planilha</div></div>
+    <div><div class="sec-t">TOP CLIENTES TRADE</div><div class="cc-s">Ranking de agências · ABR/2026 · dados reais da planilha</div></div>
   </div>
 
   <div class="cc" style="margin-bottom:15px">
-    <div class="cc-h"><div class="cc-t">Volume por Agência — Top 15</div><div class="cc-s">Bilhetes trade · AquaRio + BioParque + Paineiras · Mar/2026</div></div>
+    <div class="cc-h"><div class="cc-t">Volume por Agência — Top 15</div><div class="cc-s">Bilhetes trade · AquaRio + BioParque + Paineiras · ABR/2026</div></div>
     <canvas id="c_cli" style="max-height:360px"></canvas>
   </div>
 
   <div class="cc" style="margin-bottom:15px">
-    <div class="cc-h"><div class="cc-t">Tabela Detalhada — Top Clientes Mar/2026</div></div>
+    <div class="cc-h"><div class="cc-t">Tabela Detalhada — Top Clientes ABR/2026</div></div>
     <table class="rank-table">
       <thead><tr><th>#</th><th>Agência</th><th>AquaRio</th><th>BioParque</th><th>Paineiras</th><th>Total</th><th>Perfil</th></tr></thead>
       <tbody id="cli-tbody"></tbody>
@@ -479,67 +470,13 @@ canvas{max-height:230px}
   </div>
 </div>
 
-<div class="foot">Trade Dashboard · Grupo Cataratas · Dados extraídos da planilha · 17/03/2026</div>
+<div class="foot">Trade Dashboard · Grupo Cataratas · Dados extraídos da planilha · 16/04/2026</div>
 
 <script>
-// ══ DADOS REAIS DA PLANILHA ════════════════════════════════
-var D = {
-  mar26: {
-    aqua:  {real:5900,  obz:7480,  ref25:2544,  proj:11431, pctObz:78.88, pctProj:153, share26:12.41},
-    bio:   {real:701,   obz:2060,  ref25:780,   proj:1473,  pctObz:34.03, pctProj:72,  share26:3.81},
-    pai:   {real:38754, obz:76150, ref25:37320, proj:75086, pctObz:50.89, pctProj:99,  share26:50.43},
-    total: {real:45355, obz:85690, ref25:40644, proj:87875, pctObz:52.93, pctProj:103}
-  },
-  acum26: {aqua:35034, bio:4718, pai:197818, total:237570},
-  acum25: {aqua:21839, bio:5948, pai:205197, total:232984},
-
-  // 2025 mensal completo (do Consolidado 2025)
-  hist25: {
-    aqua:  [11225, 7509,  6293,  8749,  8730,  7449,  15982, 10494, 11913, 14862, 11037, 9636],
-    pai:   [92846, 77950, 72593, 56737, 48282, 45197, 57465, 53655, 53401, 60655, 58022, 57920],
-    bio:   [4375,  1073,  1631,  2203,  4504,  5031,  8142,  737,   2347,  6781,  4122,  2014]
-  },
-  // 2024 mensal (do Consolidado 2025)
-  hist24: {
-    aqua:  [25455, 11675, 10438, 9191, 9393, 12689, 14317, 7615, 8930, 11346, 9414, 6763],
-    pai:   [75374, 59390, 61421, 51061, 45980, 48305, 54120, 49737, 51652, 54605, 59734, 57761],
-    bio:   [2320,  1287,  1093,  2342, 2787, 7295, 7723, 3358, 4267, 4285, 3676, 1452]
-  },
-  // 2026 (Jan=fechado, Fev=fechado, Mar=parcial)
-  hist26: {
-    aqua:  [18475, 10659, 5900, null, null, null, null, null, null, null, null, null],
-    pai:   [84597, 74467, 38754, null, null, null, null, null, null, null, null, null],
-    bio:   [2852,  1165,  701,  null, null, null, null, null, null, null, null, null]
-  },
-  // Share trade mensal (disponível Jul25 em diante)
-  share: {
-    // [Jul25, Ago25, Set25, Out25, Nov25, Dez25, Jan26, Fev26, Mar26]
-    aqua: [11.73, 13.13, 15.84, 14.78, 15.13, 13.83, 13.15, 13.24, 12.41],
-    pai:  [46.56, 49.97, 50.51, 56.23, 51.21, 54.34, 46.92, 51.44, 50.43],
-    bio:  [15.32,  1.72,  6.44, 11.88, 10.58,  8.39,  5.51,  4.88,  3.81]
-  },
-  // Top clientes Mar/2026 (dados reais da aba Top Clientes-Mar)
-  clientes: [
-    {n:'C2 RIO VIAGENS E TURISMO S.A.',    a:356, b:0,   p:1853, t:2209},
-    {n:'PEPE RIO TOURS',                   a:14,  b:0,   p:2018, t:2032},
-    {n:'HYD BRAZILIAN TOURS / IN BUZIOS',  a:19,  b:0,   p:1945, t:1964},
-    {n:'RIO CARIOCA TOUR TURISMO LTDA',    a:40,  b:0,   p:1339, t:1379},
-    {n:'FERIAS RIO VIAGENS E TURISMO',     a:0,   b:0,   p:1161, t:1161},
-    {n:'RIO 40 GRAUS',                     a:0,   b:0,   p:1114, t:1114},
-    {n:'ASSOC BENEF PROF PUBL AT INAT',    a:558, b:377, p:0,    t:935},
-    {n:'RIO COPACABANA',                   a:0,   b:0,   p:906,  t:906},
-    {n:'Paineiras Corcovado (próprio)',     a:741, b:0,   p:0,    t:741},
-    {n:'A&E TOUR',                         a:0,   b:0,   p:734,  t:734},
-    {n:'PASSEIO RIO',                      a:0,   b:0,   p:630,  t:630},
-    {n:'OneRio Pass',                      a:563, b:0,   p:0,    t:563},
-    {n:'BRASIL VIAGEM OPERADORA',          a:0,   b:0,   p:528,  t:528},
-    {n:'SMART RIO',                        a:0,   b:0,   p:516,  t:516},
-    {n:'MARKTOUR',                         a:0,   b:0,   p:516,  t:516},
-  ]
-};
+var D = {mesAtual:{label:"ABR/2026",nome:"ABRIL 2026",short:"ABR",aqua:{real26:4883,real25:4374,obz:9197,proj:9766,pctMeta:53.1,pctProj:106.2,share26:13.01,receita:384888,saldo:4314,porDia:288,deltaYoY:12},bio:{real26:1220,real25:653,obz:2808,proj:2330,pctMeta:43.4,pctProj:83,share26:6.62,receita:36658,saldo:1588,porDia:265,deltaYoY:87},pai:{real26:29367,real25:28614,obz:59477,proj:58734,pctMeta:49.4,pctProj:98.8,share26:44.56,receita:2204334,saldo:30110,porDia:2008,deltaYoY:3},total:{real26:35470,real25:33641,obz:71482,proj:70830,pctMeta:49.6,pctProj:99.1,deltaYoY:5}},acum:{aqua:{r26:45141,r25:25428},bio:{r26:7067,r25:6762},pai:{r26:262285,r25:238984},total:{r26:314493,r25:271174}},hist:[],hist25:{aqua:[11225,7509,6293,8749,8730,7449,15982,10494,11913,14862,11037,9636],pai:[92846,77950,72593,56737,48282,45197,57465,53655,53401,60655,58022,57920],bio:[4375,1073,1631,2203,4504,5031,8142,737,2347,6781,4122,2014]},hist24:{aqua:[25455,11675,10438,9191,9393,12689,14317,7615,8930,11346,9414,6763],pai:[75374,59390,61421,51061,45980,48305,54120,49737,51652,54605,59734,57761],bio:[2320,1287,1093,2342,2787,7295,7723,3358,4267,4285,3676,1452]},share:{aqua:[11.73,13.13,15.84,14.78,15.13,13.83,13.15,13.24,13.01],pai:[46.56,49.97,50.51,56.23,51.21,54.34,46.92,51.44,44.56],bio:[15.32,1.72,6.44,11.88,10.58,8.39,5.51,4.88,6.62]},clientes:[{n:'C2 RIO VIAGENS E TURISMO S.A.',a:356,b:0,p:1853,t:2209},{n:'PEPE RIO TOURS',a:14,b:0,p:2018,t:2032},{n:'HYD BRAZILIAN TOURS',a:19,b:0,p:1945,t:1964},{n:'RIO CARIOCA TOUR TURISMO LTDA',a:40,b:0,p:1339,t:1379},{n:'FERIAS RIO VIAGENS E TURISMO',a:0,b:0,p:1161,t:1161},{n:'RIO 40 GRAUS',a:0,b:0,p:1114,t:1114},{n:'ASSOC BENEF PROF PUBL AT INAT',a:558,b:377,p:0,t:935},{n:'RIO COPACABANA',a:0,b:0,p:906,t:906},{n:'Paineiras Corcovado',a:741,b:0,p:0,t:741},{n:'A&E TOUR',a:0,b:0,p:734,t:734},{n:'PASSEIO RIO',a:0,b:0,p:630,t:630},{n:'OneRio Pass',a:563,b:0,p:0,t:563},{n:'BRASIL VIAGEM OPERADORA',a:0,b:0,p:528,t:528},{n:'SMART RIO',a:0,b:0,p:516,t:516},{n:'MARKTOUR',a:0,b:0,p:516,t:516}],hist26:{aqua:[null,null,null,null,null,null,null,null,null,null,null,null],pai:[null,null,null,null,null,null,null,null,null,null,null,null],bio:[null,null,null,null,null,null,null,null,null,null,null,null]}};
 
 var meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-var mesesShare = ['Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'];
+var mesesShare = ['Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26'];
 var gc = {display:true,color:'rgba(0,0,0,.04)'};
 var gn = {display:false};
 var fK = v => v>=1000?(v/1000).toFixed(0)+'k':v;
@@ -591,7 +528,7 @@ function initMar() {
     labels:['AquaRio','BioParque','Paineiras'],
     datasets:[
       {label:'Mar/2025',data:[2544,780,37320],backgroundColor:['rgba(0,180,216,.45)','rgba(255,140,42,.45)','rgba(86,195,84,.45)'],borderRadius:5,borderWidth:0},
-      {label:'Mar/2026',data:[5900,701,38754],backgroundColor:['rgba(0,95,142,.85)','rgba(194,90,0,.85)','rgba(45,106,43,.85)'],borderRadius:5,borderWidth:0}
+      {label:'ABR/2026',data:[5900,701,38754],backgroundColor:['rgba(0,95,142,.85)','rgba(194,90,0,.85)','rgba(45,106,43,.85)'],borderRadius:5,borderWidth:0}
     ]
   },options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
     plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12,font:{size:11}}}},
@@ -674,12 +611,30 @@ function donut(id, val, cor) {
 }
 
 function initShare() {
-  donut('d_aqua', 12.41, 'rgba(0,95,142,.85)');
-  donut('d_bio',  3.81,  'rgba(194,90,0,.85)');
-  donut('d_pai',  50.43, 'rgba(45,106,43,.85)');
+  // Usa dados do mês atual do D object
+  var sa = D.mesAtual ? D.mesAtual.aqua.share26 : 12.41;
+  var sb = D.mesAtual ? D.mesAtual.bio.share26  : 3.81;
+  var sp = D.mesAtual ? D.mesAtual.pai.share26  : 50.43;
+  donut('d_aqua', sa, 'rgba(0,95,142,.85)');
+  donut('d_bio',  sb, 'rgba(194,90,0,.85)');
+  donut('d_pai',  sp, 'rgba(45,106,43,.85)');
+
+  // Atualiza subtítulos dos donuts com o mês correto
+  var mesLbl = D.mesAtual ? D.mesAtual.label : 'ABR/2026';
+  document.querySelectorAll('.donut-sub').forEach(function(el) {
+    el.textContent = 'share trade ' + mesLbl;
+  });
+
+  // Labels dinâmicos baseados no histórico disponível
+  var shareLabels = ['Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25'];
+  if (D.hist && D.hist.length) {
+    D.hist.forEach(function(m) { shareLabels.push(m.mes + '/26'); });
+  } else {
+    shareLabels = mesesShare;
+  }
 
   new Chart(document.getElementById('c_share_evo'),{type:'line',data:{
-    labels: mesesShare,
+    labels: shareLabels,
     datasets:[
       {label:'AquaRio %',data:D.share.aqua,borderColor:'rgba(0,95,142,1)',backgroundColor:'rgba(0,95,142,.07)',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'rgba(0,95,142,1)',pointBorderColor:'#fff',pointBorderWidth:2,tension:.3,fill:true,yAxisID:'y'},
       {label:'BioParque %',data:D.share.bio,borderColor:'rgba(194,90,0,1)',backgroundColor:'transparent',borderWidth:2,borderDash:[4,3],pointRadius:4,pointBackgroundColor:'rgba(194,90,0,1)',tension:.3,yAxisID:'y'},
@@ -693,23 +648,27 @@ function initShare() {
       y2:{grid:{display:false},position:'right',ticks:{callback:v=>v+'%'},title:{display:true,text:'Paineiras %',font:{size:10}}}
     }}});
 
-  // Comparativo Jan-Mar 2025 x 2026
-  var sh25a=[9.25,10.03,null], sh26a=[13.15,13.24,12.41];
-  var sh25p=[49.51,54.01,null], sh26p=[46.92,51.44,50.43];
+  // Comparativo dinâmico 25 x 26 — usa D.hist
+  var histMeses = D.hist && D.hist.length ? D.hist.map(function(m){return m.mes;}) : ['Jan','Fev','Mar'];
+  var sh25Aqua  = D.hist ? D.hist.map(function(m){return m.aqua.r25>0 ? null : null;}) : [9.25,10.03,null];
+  var sh26Aqua  = D.hist ? D.hist.map(function(m){return m.aqua.share26||null;}) : [13.15,13.24,12.41];
+  var sh25Pai   = D.hist ? D.hist.map(function(){return null;}) : [49.51,54.01,null];
+  var sh26Pai   = D.hist ? D.hist.map(function(m){return m.pai.share26||null;}) : [46.92,51.44,50.43];
+
   new Chart(document.getElementById('c_share_aqua'),{type:'bar',data:{
-    labels:['Jan','Fev','Mar'],
+    labels: histMeses,
     datasets:[
-      {label:'2025',data:sh25a,backgroundColor:'rgba(0,180,216,.45)',borderRadius:4,borderWidth:0},
-      {label:'2026',data:sh26a,backgroundColor:'rgba(0,95,142,.85)',borderRadius:4,borderWidth:0}
+      {label:'2025',data:sh25Aqua,backgroundColor:'rgba(0,180,216,.45)',borderRadius:4,borderWidth:0},
+      {label:'2026',data:sh26Aqua,backgroundColor:'rgba(0,95,142,.85)',borderRadius:4,borderWidth:0}
     ]
   },options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
     plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:10,font:{size:11}}}},
     scales:{x:{grid:gn},y:{grid:gc,ticks:{callback:v=>v+'%'}}}}});
   new Chart(document.getElementById('c_share_pai'),{type:'bar',data:{
-    labels:['Jan','Fev','Mar'],
+    labels: histMeses,
     datasets:[
-      {label:'2025',data:sh25p,backgroundColor:'rgba(86,195,84,.45)',borderRadius:4,borderWidth:0},
-      {label:'2026',data:sh26p,backgroundColor:'rgba(45,106,43,.85)',borderRadius:4,borderWidth:0}
+      {label:'2025',data:sh25Pai,backgroundColor:'rgba(86,195,84,.45)',borderRadius:4,borderWidth:0},
+      {label:'2026',data:sh26Pai,backgroundColor:'rgba(45,106,43,.85)',borderRadius:4,borderWidth:0}
     ]
   },options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
     plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:10,font:{size:11}}}},
