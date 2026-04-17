@@ -333,7 +333,7 @@ canvas{max-height:230px}
       <div class="brand-small" id="topbarDate">Grupo Cataratas · 17/03/2026</div>
     </div>
   </div>
-  <button class="np on" onclick="nav(this,'mar')">📅 Mar/2026</button>
+  <button class="np on" onclick="nav(this,'mar')">📅 <span id='navMesLabel'>Mês</span></button>
   <button class="np" onclick="nav(this,'acum')">📊 Acumulado 2026</button>
   <button class="np" onclick="nav(this,'hist')">📈 Histórico 2025</button>
   <button class="np" onclick="nav(this,'share')">🔄 Share Trade</button>
@@ -711,20 +711,21 @@ function animateBars(){
 // ════════════════════════════════════════
 // INIT CHARTS
 // ════════════════════════════════════════
-function initCharts(id){
-  if(id==='mar')   initMar();
-  if(id==='acum')  initAcum();
+function initCharts(id,md){
+  if(id==='mar')   initMar(md);
+  if(id==='acum')  initAcum(md);
   if(id==='hist')  initHist();
-  if(id==='share') initShare();
-  if(id==='cli')   initCli();
+  if(id==='share') initShare(md);
+  if(id==='cli')   initCli(md);
 }
 
 // ── MAR ──────────────────────────────────
-function initMar(){
-  var m = D.mesAtual || D.mar26;
-  var aqua  = m.aqua  || {real26:m.aqua&&m.aqua.real||0};
+function initMar(mesData){
+  var m = mesData || D.mesAtual || D.mar26;
+  var aqua  = m.aqua  || {};
   var bio   = m.bio   || {};
   var pai   = m.pai   || {};
+  var isFechado = m.isFechado || false;
   // compatibilidade com estrutura antiga (real vs real26)
   var aR=aqua.real26||aqua.real||0, aO=aqua.obz||0, aP=aqua.proj||0;
   var bR=bio.real26||bio.real||0,   bO=bio.obz||0,   bP=bio.proj||0;
@@ -755,8 +756,8 @@ function initMar(){
 }
 
 // ── ACUM ─────────────────────────────────
-function initAcum(){
-  var a=D.acum;
+function initAcum(mesData){
+  var a=(mesData&&mesData.acum)||D.acum;
   if(!a){a={aqua:{r26:35034,r25:21839},bio:{r26:4718,r25:5948},pai:{r26:197818,r25:205197},total:{r26:237570,r25:232984}};}
   mkChart('c_acum',{type:'bar',data:{
     labels:['AquaRio','BioParque','Paineiras','Total'],
@@ -856,14 +857,19 @@ function donut(id,val,cor){
   chartReg[id]=ch;
 }
 
-function initShare(){
-  var m=D.mesAtual;
+function initShare(mesData){
+  var m=mesData||D.mesAtual;
   var sa=m?m.aqua.share26:12.41;
   var sb=m?m.bio.share26:3.81;
   var sp=m?m.pai.share26:50.43;
   donut('d_aqua',sa,'rgba(0,95,142,.85)');
   donut('d_bio', sb,'rgba(194,90,0,.85)');
   donut('d_pai', sp,'rgba(45,106,43,.85)');
+  // Atualiza valores e textos dos donuts
+  var fS=function(v){return v.toFixed(2).replace('.',',')+'%';};
+  var mesLbl=m?m.label:'';
+  ['shareValAqua','shareValBio','shareValPai'].forEach(function(id,i){var el=document.getElementById(id);if(el)el.textContent=fS([sa,sb,sp][i]);});
+  document.querySelectorAll('.donut-sub').forEach(function(el){el.textContent='share trade '+mesLbl;});
 
   mkChart('c_share_evo',{type:'line',data:{
     labels:mesesSh,
@@ -896,8 +902,10 @@ function initShare(){
 }
 
 // ── CLIENTES ─────────────────────────────
-function initCli(){
-  var top15=D.clientes;
+function initCli(mesData){
+  var m=mesData||{};
+  var top15=(m.clientes&&m.clientes.length)?m.clientes:D.clientes;
+  if(!top15||!top15.length){document.getElementById('cli-tbody').innerHTML='<tr><td colspan=7 style="text-align:center;color:#aaa;padding:20px">Dados não disponíveis para este mês</td></tr>';return;}
   var maxT=top15[0].t;
   mkChart('c_cli',{type:'bar',data:{
     labels:top15.map(c=>c.n.length>30?c.n.slice(0,30)+'…':c.n),
@@ -1066,6 +1074,7 @@ function renderMes(m){
   // Footer
   var ft=document.getElementById('footEl');
   if(ft) ft.textContent='Trade Dashboard · Grupo Cataratas · Dados extraídos da planilha · '+(m.dataFmt||'');
+  var nl=document.getElementById('navMesLabel');if(nl)nl.textContent=(m.label||'');
 
   // Reconstrói conteúdo mobile
   buildMobContent(curPage, m);
@@ -1074,7 +1083,7 @@ function renderMes(m){
   Object.keys(chartReg).forEach(id=>{try{chartReg[id].destroy();}catch(e){}});
   chartReg={};
   inited={};
-  setTimeout(()=>{inited[curPage]=true;initCharts(curPage);},60);
+  setTimeout(()=>{inited[curPage]=true;initCharts(curPage,m);},60);
 }
 
 // ════════════════════════════════════════
