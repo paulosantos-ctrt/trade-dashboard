@@ -1493,18 +1493,29 @@ function cliGetDados(){
 
 function cliGetPeriodo(){
   var meses = D.meses || [];
-  if(cliPeriodo==='none'){
-    // Sem comparação — usa só o mês mais recente disponível
-    var cur = meses.slice(-1);
-    var lbl = cur.length ? cur[0].label : '—';
-    return {cur:cur, prev:[], curLabel:lbl, prevLabel:'—', n:1};
+  if(!meses.length) return {cur:[], prev:[], curLabel:'—', prevLabel:'—', n:0};
+  // Encontrar índice âncora baseado no mês selecionado (cliCurMes)
+  var ancIdx = meses.length - 1;
+  if(cliCurMes && cliCurMes.mesIdx !== undefined){
+    var found = -1;
+    for(var fi=0;fi<meses.length;fi++){
+      if(meses[fi].mesIdx === cliCurMes.mesIdx){ found = fi; break; }
+    }
+    if(found >= 0) ancIdx = found;
   }
+  // Só este período: somente o mês âncora
+  if(cliPeriodo==='none'){
+    var cur = [meses[ancIdx]];
+    return {cur:cur, prev:[], curLabel:cur[0].label, prevLabel:'—', n:1};
+  }
+  // Períodos comparativos: n meses terminando no mês âncora
   var n = cliPeriodo==='1m'?1:cliPeriodo==='3m'?3:cliPeriodo==='6m'?6:12;
-  var cur  = meses.slice(-n);
-  var prev = meses.length > n ? meses.slice(-(n*2), -n) : [];
-  var curLabel  = cur.length  ? cur[0].label  + (cur.length>1?' → '+cur[cur.length-1].label:'') : '—';
-  var prevLabel = prev.length ? prev[0].label + (prev.length>1?' → '+prev[prev.length-1].label:'') : '—';
-  return {cur:cur, prev:prev, curLabel:curLabel, prevLabel:prevLabel, n:n};
+  var cur  = meses.slice(Math.max(0, ancIdx-n+1), ancIdx+1);
+  var prev = ancIdx >= n ? meses.slice(Math.max(0, ancIdx-n*2+1), ancIdx-n+1) : [];
+  var lbl  = function(arr){
+    return arr.length===1 ? arr[0].label : arr[0].label+' → '+arr[arr.length-1].label;
+  };
+  return {cur:cur, prev:prev, curLabel:lbl(cur), prevLabel:prev.length?lbl(prev):'—', n:n};
 }
 
 function cliTot(dados, ag, meses){
